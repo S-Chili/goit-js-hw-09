@@ -16,3 +16,23 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.main__item {
+  margin-bottom: 30px;
+  list-style: none;
+}
+
+.main__link {
+  list-style: none;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 250px;
+  background-color: #ddd3e2;
+  text-shadow: 1px 1px 0 #ddd3e2;
+  font-size: 16px;
+  font: inherit;
+  font-weight: bold;
+  color: #3f3448;
+  box-shadow: -5px -5px 20px #ddd3e2, 5px 5px 20px #ddd3e2;
+  cursor: pointer;
+}
