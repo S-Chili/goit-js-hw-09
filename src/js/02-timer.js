@@ -9,6 +9,16 @@ const hoursField = document.querySelector('[data-hours]');
 const minutesField = document.querySelector('[data-minutes]');
 const secondsField = document.querySelector('[data-seconds]');
 
+flatpickr(dateTimePicker, {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    console.log(selectedDates[0]);
+  },
+});
+
 const convertMs = ms => {
   const second = 1000;
   const minute = second * 60;
@@ -22,16 +32,6 @@ const convertMs = ms => {
 
   return { days, hours, minutes, seconds };
 };
-
-flatpickr(dateTimePicker, {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-});
 
 startButton.disabled = true;
 
@@ -49,17 +49,8 @@ dateTimePicker.addEventListener('change', event => {
 
 startButton.addEventListener('click', () => {
   const selectedDate = new Date(dateTimePicker.value).getTime();
-  const currentDate = new Date().getTime();
-  const timeLeft = selectedDate - currentDate;
 
-  if (timeLeft <= 0) {
-    clearInterval(timerId);
-    daysField.textContent = '00';
-    hoursField.textContent = '00';
-    minutesField.textContent = '00';
-    secondsField.textContent = '00';
-    return;
-  }
+  startButton.disabled = true;
 
   const timerId = setInterval(() => {
     const timeLeft = selectedDate - new Date().getTime();
@@ -69,7 +60,6 @@ startButton.addEventListener('click', () => {
       hoursField.textContent = '00';
       minutesField.textContent = '00';
       secondsField.textContent = '00';
-      startButton.disabled = true;
       return;
     }
 
